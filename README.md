@@ -26,5 +26,5 @@
 - [x] 3. Any stylistic changes that are not default options (i.e. orange switch and buttons).
 
 ### Additional Optional Features
-- [x] 4. Input validation: App prompts user to provide missing information in an alert box if user presses the introduce yourself button without completing all form fields.
-- [x] 5. Persistence (UserDefaults): When user presses the introduce yourself button after completing all form fields, the app save the entered information. App retains data entered even after the app is closed or reboots. When app opens, the components are pre-set with the saved data.
+- [x] 4. Input validation: App prompts user through an alert box to provide missing information if user presses the introduce yourself button without completing all form fields.
+- [x] 5. Persistence (UserDefaults): When user presses the introduce yourself button after completing all form fields, the app saves the entered information. App retains data entered even after the app is closed or reboots. When app opens, the components are pre-set with the saved data.
