@@ -6,9 +6,7 @@
 
 ### App Walkthough
 
-`TODO://` Add gif.
-
-<!-- <img src="YOUR_GIF_URL_HERE" width=200><br> OR <img src="YOUR_GIF_PATH" width=200><br> -->
+<img src="https://raw.githubusercontent.com/ProjectSkyapple/CodePath-ios-102-prework-23S/main/demo.gif" width=200><br>
 
 ### Required Features
 
