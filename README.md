@@ -6,7 +6,7 @@
 
 ### App Walkthough
 
-<img src="https://raw.githubusercontent.com/ProjectSkyapple/CodePath-ios-102-prework-23S/main/demo.gif" width=200><br>
+<img src="https://raw.githubusercontent.com/ProjectSkyapple/CodePath-ios-102-prework-23S/main/demo.gif"><br>
 
 ### Required Features
 
