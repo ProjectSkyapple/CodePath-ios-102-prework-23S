@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    //Create UserDefaults object named "defaults"
     var defaults = UserDefaults.standard
     
     @IBOutlet weak var firstNameTextField: UITextField!
@@ -22,28 +23,33 @@ class ViewController: UIViewController {
     @IBOutlet weak var introduceSelfButton: UIButton!
     @IBOutlet weak var backgroundColorButton: UIButton!
     
+    // Method for updating label displaying pet count when stepper is pressed
     @IBAction func stepperDidChange(_ sender: UIStepper) {
         numPetsLabel.text = "\(Int(sender.value))"
     }
+    
+    // Method for introduce yourself button
     @IBAction func introduceSelfButtonPressed(_ sender: UIButton) {
         
         var errorMessage = "Hold on."
         
-        if ("\(firstNameTextField.text!)" == "") {
+        //Find empty textfields and write error message if necessary
+        if (firstNameTextField.text == "") {
             errorMessage += " What's your first name?"
         }
-        if ("\(lastNameTextField.text!)" == "") {
+        if (lastNameTextField.text == "") {
             errorMessage += " What's your last name?"
         }
-        if ("\(schoolNameTextField.text!)" == "") {
+        if (schoolNameTextField.text == "") {
             errorMessage += " Where do you go to school?"
         }
-        if ("\(majorTextField.text!)" == "") {
+        if (majorTextField.text == "") {
             errorMessage += " What's your major?"
         }
         
-        if (errorMessage == "Hold on.") {
+        if (errorMessage == "Hold on.") { // If all fields complete
             
+            // Write introduction
             let year = yearSegmentedControl.titleForSegment(at: yearSegmentedControl.selectedSegmentIndex)
             var introduction = "☄️ Hey, I'm \(firstNameTextField.text!) \(lastNameTextField.text!), and I'm whooshing at \(schoolNameTextField.text!). I'm a \(year!)-Year student here pursuing a degree in \(majorTextField.text!)."
             if (numPetsLabel.text! == "1") {
@@ -54,26 +60,27 @@ class ViewController: UIViewController {
             }
             introduction += " It is \(morePetsSwitch.isOn) I want more pets to own me."
             
-            defaults.set("\(firstNameTextField.text!)", forKey: "FirstName")
-            defaults.set("\(lastNameTextField.text!)", forKey: "LastName")
-            defaults.set("\(schoolNameTextField.text!)", forKey: "SchoolName")
-            defaults.set("\(majorTextField.text!)", forKey: "Major")
+            // Save entered data
+            defaults.set(firstNameTextField.text!, forKey: "FirstName")
+            defaults.set(lastNameTextField.text!, forKey: "LastName")
+            defaults.set(schoolNameTextField.text!, forKey: "SchoolName")
+            defaults.set(majorTextField.text!, forKey: "Major")
             defaults.set(yearSegmentedControl.selectedSegmentIndex, forKey: "YearIndex")
-            defaults.set("\(numPetsLabel.text!)", forKey: "PetQuantity")
-            defaults.set("\(morePetsSwitch.isOn)", forKey: "WantsMorePets")
+            defaults.set(numPetsLabel.text!, forKey: "PetQuantity")
+            defaults.set(morePetsSwitch.isOn, forKey: "WantsMorePets")
+            
+            print("Defaults saved.")
             
             print(introduction)
             
+            //Show introduction alert
             let introductionAlertController = UIAlertController(title: "My Introduction", message: introduction, preferredStyle: .alert)
-            
             let action = UIAlertAction(title: "Nice to meet you, \(firstNameTextField.text!)", style: .default, handler: nil)
-            
             introductionAlertController.addAction(action)
-            
             present(introductionAlertController, animated: true, completion: nil)
             
         }
-        else {
+        else { // Show error alert if textfields are incomplete
             
             print(errorMessage)
             
@@ -88,6 +95,8 @@ class ViewController: UIViewController {
         }
         
     }
+    
+    // Method for changing background color
     @IBAction func backgroundColorButtonPressed(_ sender: UIButton) {
         
         if (view.backgroundColor == UIColor.systemBackground && traitCollection.userInterfaceStyle == .light) {
@@ -100,24 +109,26 @@ class ViewController: UIViewController {
             view.backgroundColor = UIColor.systemBackground
         }
         
+        print("Background color changed.")
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        firstNameTextField.text = defaults.object(forKey: "FirstName") as? String ?? nil
-        lastNameTextField.text = defaults.object(forKey: "LastName") as? String ?? nil
-        schoolNameTextField.text = defaults.object(forKey: "SchoolName") as? String ?? nil
-        majorTextField.text = defaults.object(forKey: "Major") as? String ?? nil
+        // Load saved data/defaults if they exist
+        firstNameTextField.text = defaults.object(forKey: "FirstName") as? String
+        lastNameTextField.text = defaults.object(forKey: "LastName") as? String
+        schoolNameTextField.text = defaults.object(forKey: "SchoolName") as? String
+        majorTextField.text = defaults.object(forKey: "Major") as? String
         yearSegmentedControl.selectedSegmentIndex = defaults.integer(forKey: "YearIndex")
         morePetsStepper.value = defaults.double(forKey: "PetQuantity")
         numPetsLabel.text = "\(Int(morePetsStepper.value))"
         morePetsSwitch.isOn = defaults.bool(forKey: "WantsMorePets")
         
+        print("Defaults loaded.")
         
     }
 
-
 }
-
